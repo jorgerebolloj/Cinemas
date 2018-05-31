@@ -20,7 +20,7 @@ class ActivityIndicator: UIView {
         
         strLabel = UILabel(frame: CGRect(x: 50, y: 0, width: 200, height: 46))
         strLabel.text = title
-        strLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFontWeightMedium)
+        strLabel.font = UIFont.systemFont(ofSize: 14, weight: UIFont.Weight.medium)
         strLabel.textColor = UIColor(red:0.99, green:0.72, blue:0.15, alpha:1.0)
         
         effectView.frame = CGRect(x: superview!.frame.midX - strLabel.frame.width/2, y: superview!.frame.midY - strLabel.frame.height/2 , width: 220, height: 46)

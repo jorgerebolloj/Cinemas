@@ -1,12 +1,21 @@
 # Uncomment the next line to define a global platform for your project
 platform :ios, '9.0'
 
-target 'Cinemas' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
+# Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
 
-  # Pods for Cinemas
-  pod 'FMDB'
-  #pod 'TNImageSliderViewController'
+def podsCinemas
+    
+    # Pods for Cinemas
+    pod 'FMDB'
+    #pod 'TNImageSliderViewController'
+    
+end
+
+#Production target
+target 'Cinemas' do
+
+  podsCinemas
 
 end
