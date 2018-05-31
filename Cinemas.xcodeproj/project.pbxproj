@@ -95,26 +95,15 @@
 			isa = PBXGroup;
 			children = (
 				3003F7881EDFA3ED0004297E /* AppDelegate.swift */,
-				3003F79D1EDFBFF80004297E /* Constants.swift */,
-				3003F78A1EDFA3ED0004297E /* CitiesViewController.swift */,
-				300AC3841EE06ED500604356 /* CityTableViewCell.swift */,
-				300AC3881EE0757300604356 /* ComplexViewController.swift */,
-				300AC3861EE0724B00604356 /* ComplexTableViewCell.swift */,
-				307F0E411EE11FF70099CFF2 /* MapViewController.swift */,
-				307F0E431EE1255C0099CFF2 /* ComplexLocation.swift */,
-				307F0E451EE14F9D0099CFF2 /* BillboardViewController.swift */,
-				307F0E471EE160C60099CFF2 /* BillboardTableViewCell.swift */,
-				307F0E491EE176470099CFF2 /* MovieViewController.swift */,
-				307F0E4B1EE1BCB10099CFF2 /* GalleryViewController.swift */,
-				307F0E4D1EE1BD010099CFF2 /* TrailerViewController.swift */,
-				307F0E501EE1BD220099CFF2 /* ScheduleViewController.swift */,
-				305950FB1EE7833300D44B78 /* ScheduleTableViewCell.swift */,
-				30B52C651EE1DAEF005F2B40 /* ActivityIndicator.swift */,
-				3003F78F1EDFA3ED0004297E /* Cinemas.xcdatamodeld */,
-				3003F78C1EDFA3ED0004297E /* Main.storyboard */,
-				3003F7921EDFA3ED0004297E /* Assets.xcassets */,
-				3003F7941EDFA3ED0004297E /* LaunchScreen.storyboard */,
-				3003F7971EDFA3ED0004297E /* Info.plist */,
+				EAC6864020BF99980077787C /* Extensions */,
+				EAC6864120BF99AC0077787C /* Models */,
+				EAC6864220BF99B60077787C /* Services */,
+				EAC6864320BF99C30077787C /* Workers */,
+				EAC6864420BF99D00077787C /* Modules */,
+				EAC6865220BF9D370077787C /* Common */,
+				EAC6865320BF9D4C0077787C /* Resources */,
+				EAC6865420BF9D650077787C /* Persistence */,
+				EAC6865520BF9D7C0077787C /* Supporting files */,
 			);
 			path = Cinemas;
 			sourceTree = "<group>";
@@ -135,6 +124,185 @@
 				86E7A1CCAC2C9D97812B6566 /* Pods-Cinemas.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		EAC6864020BF99980077787C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EAC6864120BF99AC0077787C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		EAC6864220BF99B60077787C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3003F79D1EDFBFF80004297E /* Constants.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		EAC6864320BF99C30077787C /* Workers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Workers;
+			sourceTree = "<group>";
+		};
+		EAC6864420BF99D00077787C /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				3003F78C1EDFA3ED0004297E /* Main.storyboard */,
+				EAC6864520BF99DC0077787C /* Cities */,
+				EAC6864720BF9A020077787C /* MovieTheaters */,
+				EAC6864B20BF9C110077787C /* Billboard */,
+				EAC6864D20BF9C730077787C /* Movies */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		EAC6864520BF99DC0077787C /* Cities */ = {
+			isa = PBXGroup;
+			children = (
+				EAC6864620BF99E20077787C /* CitiesListScene */,
+			);
+			path = Cities;
+			sourceTree = "<group>";
+		};
+		EAC6864620BF99E20077787C /* CitiesListScene */ = {
+			isa = PBXGroup;
+			children = (
+				3003F78A1EDFA3ED0004297E /* CitiesViewController.swift */,
+				300AC3841EE06ED500604356 /* CityTableViewCell.swift */,
+			);
+			path = CitiesListScene;
+			sourceTree = "<group>";
+		};
+		EAC6864720BF9A020077787C /* MovieTheaters */ = {
+			isa = PBXGroup;
+			children = (
+				EAC6864820BF9A2F0077787C /* MovieTheatersListScene */,
+				EAC6864A20BF9B050077787C /* MovieTheatersMapScene */,
+			);
+			path = MovieTheaters;
+			sourceTree = "<group>";
+		};
+		EAC6864820BF9A2F0077787C /* MovieTheatersListScene */ = {
+			isa = PBXGroup;
+			children = (
+				300AC3881EE0757300604356 /* ComplexViewController.swift */,
+				300AC3861EE0724B00604356 /* ComplexTableViewCell.swift */,
+			);
+			path = MovieTheatersListScene;
+			sourceTree = "<group>";
+		};
+		EAC6864A20BF9B050077787C /* MovieTheatersMapScene */ = {
+			isa = PBXGroup;
+			children = (
+				307F0E411EE11FF70099CFF2 /* MapViewController.swift */,
+				307F0E431EE1255C0099CFF2 /* ComplexLocation.swift */,
+			);
+			path = MovieTheatersMapScene;
+			sourceTree = "<group>";
+		};
+		EAC6864B20BF9C110077787C /* Billboard */ = {
+			isa = PBXGroup;
+			children = (
+				EAC6864C20BF9C1C0077787C /* BilboardListScene */,
+			);
+			path = Billboard;
+			sourceTree = "<group>";
+		};
+		EAC6864C20BF9C1C0077787C /* BilboardListScene */ = {
+			isa = PBXGroup;
+			children = (
+				307F0E451EE14F9D0099CFF2 /* BillboardViewController.swift */,
+				307F0E471EE160C60099CFF2 /* BillboardTableViewCell.swift */,
+			);
+			path = BilboardListScene;
+			sourceTree = "<group>";
+		};
+		EAC6864D20BF9C730077787C /* Movies */ = {
+			isa = PBXGroup;
+			children = (
+				EAC6864E20BF9C820077787C /* MovieInfoScene */,
+				EAC6864F20BF9C8E0077787C /* MovieGalleryScene */,
+				EAC6865020BF9CA70077787C /* MovieTrailerScene */,
+				EAC6865120BF9CC30077787C /* MovieScheduleListScene */,
+			);
+			path = Movies;
+			sourceTree = "<group>";
+		};
+		EAC6864E20BF9C820077787C /* MovieInfoScene */ = {
+			isa = PBXGroup;
+			children = (
+				307F0E491EE176470099CFF2 /* MovieViewController.swift */,
+			);
+			path = MovieInfoScene;
+			sourceTree = "<group>";
+		};
+		EAC6864F20BF9C8E0077787C /* MovieGalleryScene */ = {
+			isa = PBXGroup;
+			children = (
+				307F0E4B1EE1BCB10099CFF2 /* GalleryViewController.swift */,
+			);
+			path = MovieGalleryScene;
+			sourceTree = "<group>";
+		};
+		EAC6865020BF9CA70077787C /* MovieTrailerScene */ = {
+			isa = PBXGroup;
+			children = (
+				307F0E4D1EE1BD010099CFF2 /* TrailerViewController.swift */,
+			);
+			path = MovieTrailerScene;
+			sourceTree = "<group>";
+		};
+		EAC6865120BF9CC30077787C /* MovieScheduleListScene */ = {
+			isa = PBXGroup;
+			children = (
+				307F0E501EE1BD220099CFF2 /* ScheduleViewController.swift */,
+				305950FB1EE7833300D44B78 /* ScheduleTableViewCell.swift */,
+			);
+			path = MovieScheduleListScene;
+			sourceTree = "<group>";
+		};
+		EAC6865220BF9D370077787C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				30B52C651EE1DAEF005F2B40 /* ActivityIndicator.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		EAC6865320BF9D4C0077787C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3003F7921EDFA3ED0004297E /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EAC6865420BF9D650077787C /* Persistence */ = {
+			isa = PBXGroup;
+			children = (
+				3003F78F1EDFA3ED0004297E /* Cinemas.xcdatamodeld */,
+			);
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		EAC6865520BF9D7C0077787C /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				3003F7941EDFA3ED0004297E /* LaunchScreen.storyboard */,
+				3003F7971EDFA3ED0004297E /* Info.plist */,
+			);
+			path = "Supporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -382,7 +550,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QGMJDWHD6Q;
-				INFOPLIST_FILE = Cinemas/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Cinemas/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.personal.Cinemas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -397,7 +565,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = QGMJDWHD6Q;
-				INFOPLIST_FILE = Cinemas/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Cinemas/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.personal.Cinemas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
