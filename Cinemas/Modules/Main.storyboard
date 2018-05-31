@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17E202" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DLr-Pj-5hy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DLr-Pj-5hy">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -28,7 +28,7 @@
                                 <color key="backgroundColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CityCell" id="TsP-yX-2d5" customClass="CityTableViewCell" customModule="Cinemas" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CityCell" id="TsP-yX-2d5" customClass="CityTableViewCell" customModule="Cinemas" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TsP-yX-2d5" id="daC-db-d5G">
@@ -36,7 +36,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWx-Sg-6ke">
-                                                    <rect key="frame" x="8" y="8" width="359" height="27"/>
+                                                    <rect key="frame" x="15" y="11" width="120" height="22"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="0.99215686274509807" green="0.72156862745098038" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -160,7 +160,7 @@
                                 <color key="backgroundColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BillboardCell" id="0PE-i2-jP4" customClass="BillboardTableViewCell" customModule="Cinemas" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BillboardCell" id="0PE-i2-jP4" customClass="BillboardTableViewCell" customModule="Cinemas" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0PE-i2-jP4" id="HGx-3c-VQS">
@@ -168,7 +168,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5D-bF-u83">
-                                                    <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="120" height="16"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -421,21 +421,21 @@
                                         <exclude reference="efL-4Y-maX"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <exclude reference="4ZY-ha-SHA"/>
-                                        <exclude reference="G2J-m5-vb4"/>
-                                        <exclude reference="yXs-t0-Set"/>
-                                        <exclude reference="OWC-wc-aFM"/>
-                                        <exclude reference="o4q-ur-MRg"/>
-                                        <exclude reference="pxv-zG-m6I"/>
-                                        <exclude reference="3SH-rm-aj3"/>
-                                        <exclude reference="LQV-50-amL"/>
-                                        <exclude reference="Rio-rY-9tD"/>
                                         <exclude reference="i51-ks-fRD"/>
                                         <exclude reference="tMv-lq-KFf"/>
                                         <exclude reference="vPS-xv-wCd"/>
+                                        <exclude reference="3SH-rm-aj3"/>
+                                        <exclude reference="LQV-50-amL"/>
+                                        <exclude reference="Rio-rY-9tD"/>
                                         <exclude reference="5KY-Ic-Myy"/>
                                         <exclude reference="QHz-ph-p3Y"/>
                                         <exclude reference="ZrC-52-Bhg"/>
+                                        <exclude reference="OWC-wc-aFM"/>
+                                        <exclude reference="o4q-ur-MRg"/>
+                                        <exclude reference="pxv-zG-m6I"/>
+                                        <exclude reference="4ZY-ha-SHA"/>
+                                        <exclude reference="G2J-m5-vb4"/>
+                                        <exclude reference="yXs-t0-Set"/>
                                         <exclude reference="a6a-6r-6OS"/>
                                         <exclude reference="a7U-rM-eUV"/>
                                         <exclude reference="hNL-uO-Qmc"/>
@@ -451,21 +451,21 @@
                                         <include reference="efL-4Y-maX"/>
                                     </mask>
                                     <mask key="constraints">
-                                        <include reference="4ZY-ha-SHA"/>
-                                        <include reference="G2J-m5-vb4"/>
-                                        <include reference="yXs-t0-Set"/>
-                                        <include reference="OWC-wc-aFM"/>
-                                        <include reference="o4q-ur-MRg"/>
-                                        <include reference="pxv-zG-m6I"/>
-                                        <include reference="3SH-rm-aj3"/>
-                                        <include reference="LQV-50-amL"/>
-                                        <include reference="Rio-rY-9tD"/>
                                         <include reference="i51-ks-fRD"/>
                                         <include reference="tMv-lq-KFf"/>
                                         <include reference="vPS-xv-wCd"/>
+                                        <include reference="3SH-rm-aj3"/>
+                                        <include reference="LQV-50-amL"/>
+                                        <include reference="Rio-rY-9tD"/>
                                         <include reference="5KY-Ic-Myy"/>
                                         <include reference="QHz-ph-p3Y"/>
                                         <include reference="ZrC-52-Bhg"/>
+                                        <include reference="OWC-wc-aFM"/>
+                                        <include reference="o4q-ur-MRg"/>
+                                        <include reference="pxv-zG-m6I"/>
+                                        <include reference="4ZY-ha-SHA"/>
+                                        <include reference="G2J-m5-vb4"/>
+                                        <include reference="yXs-t0-Set"/>
                                         <include reference="a6a-6r-6OS"/>
                                         <include reference="a7U-rM-eUV"/>
                                         <include reference="hNL-uO-Qmc"/>
@@ -654,7 +654,7 @@
                                 <color key="backgroundColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScheduleCell" rowHeight="64" id="SPI-8c-0pi" customClass="ScheduleTableViewCell" customModule="Cinemas" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScheduleCell" rowHeight="64" id="SPI-8c-0pi" customClass="ScheduleTableViewCell" customModule="Cinemas" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SPI-8c-0pi" id="LmL-9D-E7W">
@@ -662,16 +662,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="R8P-HG-fdT">
-                                                    <rect key="frame" x="8" y="8" width="359" height="47.5"/>
+                                                    <rect key="frame" x="15" y="11" width="120" height="42"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1FG-Jd-J5Q">
-                                                            <rect key="frame" x="0.0" y="0.0" width="359" height="21"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="120" height="18"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <color key="textColor" red="0.99215686270000003" green="0.72156862749999995" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bmJ-7X-O6A">
-                                                            <rect key="frame" x="0.0" y="27" width="359" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="24" width="120" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -692,11 +692,11 @@
                                                     <exclude reference="R8P-HG-fdT"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="GtX-4H-JbJ"/>
                                                     <exclude reference="UTd-KM-beC"/>
                                                     <exclude reference="V2J-bs-xsy"/>
                                                     <exclude reference="WjS-hU-9Gl"/>
                                                     <exclude reference="uYZ-MC-o8F"/>
-                                                    <exclude reference="GtX-4H-JbJ"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular">
@@ -704,11 +704,11 @@
                                                     <include reference="R8P-HG-fdT"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="GtX-4H-JbJ"/>
                                                     <include reference="UTd-KM-beC"/>
                                                     <include reference="V2J-bs-xsy"/>
                                                     <include reference="WjS-hU-9Gl"/>
                                                     <include reference="uYZ-MC-o8F"/>
-                                                    <include reference="GtX-4H-JbJ"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -824,7 +824,7 @@
                                 <color key="backgroundColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="separatorColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="ComplexCell" rowHeight="95" id="hRh-aw-7MR" customClass="ComplexTableViewCell" customModule="Cinemas" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="ComplexCell" rowHeight="95" id="hRh-aw-7MR" customClass="ComplexTableViewCell" customModule="Cinemas" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="95"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="hRh-aw-7MR" id="ZiW-ew-7jd">
@@ -832,13 +832,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2e-AR-WkI">
-                                                    <rect key="frame" x="8" y="37" width="359" height="49"/>
+                                                    <rect key="frame" x="15" y="40" width="120" height="44"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complex name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x4F-bx-GSC">
-                                                    <rect key="frame" x="8" y="8" width="359" height="21"/>
+                                                    <rect key="frame" x="15" y="11" width="120" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="gov-J6-9hk"/>
                                                     </constraints>
@@ -1062,7 +1062,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DLr-Pj-5hy" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="x2b-Jh-ok1">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" red="0.99215686270000003" green="0.72156862749999995" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
