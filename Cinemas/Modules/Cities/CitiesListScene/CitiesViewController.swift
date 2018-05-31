@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import Alamofire
 
 class CitiesViewController: UIViewController {
     @IBOutlet weak var citiesTableView: UITableView!
@@ -23,40 +24,57 @@ class CitiesViewController: UIViewController {
 //        self.view.addSubview(activityIndicator)
 //        activityIndicator.activityIndicator("Cargando Ciudades...")
         
-        let url = URL(string: Constants.apiUrlCities)
-        let session = URLSession.shared
+        Alamofire.request(Constants.apiUrlCities).responseJSON { response in
+            if let JSON = response.result.value {
+                let jsonArray = JSON as? NSArray
+                jsonArray?.enumerateObjects({ objeto, index, stop in
+                    let arrayCity = objeto as! NSDictionary
+                    print("City \(index):\(arrayCity)")
+                    self.saveCity(arrayCity)
+                    
+                    DispatchQueue.main.async(execute: { () -> Void in
+                        self.citiesTableView.reloadData()
+                        self.loaderBackgroundView.isHidden = true
+                        //                                    self.activityIndicator.effectView.removeFromSuperview()
+                    })
+                })
+            }
+        }
         
-        let qualityOfServiceClass = DispatchQoS.QoSClass.background
-        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
-        backgroundQueue.async(execute: {
-            let task = session.dataTask(with: url!, completionHandler: {data, response, error -> Void in
-                if(error != nil) {
-                    print(error!.localizedDescription)
-                } else {
-                    let nsdata:Data = NSData(data: data!) as Data
-                    do {
-                        let jsonCompleto = try JSONSerialization.jsonObject(with: nsdata, options: JSONSerialization.ReadingOptions.mutableContainers)
-                        print("Json Completo\(jsonCompleto)")
-                        if let nsArrayJson = jsonCompleto as? NSArray {
-                            nsArrayJson.enumerateObjects({ objeto, index, stop in
-                                let arrayCity = objeto as! NSDictionary
-                                print("City \(index):\(arrayCity)")
-                                self.saveCity(arrayCity)
-                                
-                                DispatchQueue.main.async(execute: { () -> Void in
-                                    self.citiesTableView.reloadData()
-                                    self.loaderBackgroundView.isHidden = true
-//                                    self.activityIndicator.effectView.removeFromSuperview()
-                                })
-                            })
-                        }
-                    } catch {
-                        print("Error al serializar Json")
-                    }
-                }
-            })
-            task.resume()
-        })
+//        let url = URL(string: Constants.apiUrlCities)
+//        let session = URLSession.shared
+//
+//        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+//        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+//        backgroundQueue.async(execute: {
+//            let task = session.dataTask(with: url!, completionHandler: {data, response, error -> Void in
+//                if(error != nil) {
+//                    print(error!.localizedDescription)
+//                } else {
+//                    let nsdata:Data = NSData(data: data!) as Data
+//                    do {
+//                        let jsonCompleto = try JSONSerialization.jsonObject(with: nsdata, options: JSONSerialization.ReadingOptions.mutableContainers)
+//                        print("Json Completo\(jsonCompleto)")
+//                        if let nsArrayJson = jsonCompleto as? NSArray {
+//                            nsArrayJson.enumerateObjects({ objeto, index, stop in
+//                                let arrayCity = objeto as! NSDictionary
+//                                print("City \(index):\(arrayCity)")
+//                                self.saveCity(arrayCity)
+//
+//                                DispatchQueue.main.async(execute: { () -> Void in
+//                                    self.citiesTableView.reloadData()
+//                                    self.loaderBackgroundView.isHidden = true
+////                                    self.activityIndicator.effectView.removeFromSuperview()
+//                                })
+//                            })
+//                        }
+//                    } catch {
+//                        print("Error al serializar Json")
+//                    }
+//                }
+//            })
+//            task.resume()
+//        })
     }
     
     func saveCity(_ cityValues: NSDictionary) {
@@ -123,37 +141,52 @@ extension CitiesViewController: UITableViewDataSource, UITableViewDelegate {
         let cityId = String(describing: city.value(forKey: "Id")!)
         self.cityId = cityId
         print("CityId= \(self.cityId)")
-        let url = URL(string: Constants.apiUrlCity + cityId)
-        let downloadRequest = URLRequest(url: url!)
-        let session = URLSession.shared
         
-        let qualityOfServiceClass = DispatchQoS.QoSClass.background
-        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
-        backgroundQueue.async(execute: {
-            let task = session.downloadTask(with: downloadRequest, completionHandler: {url, response, error -> Void in
-                if(error != nil) {
-                    print(error!.localizedDescription)
-                } else {
-                    guard  let tempLocation = url, error == nil else { return }
-                    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-                    let fullUrl = documentDirectory?.appendingPathComponent("\(cityId).sqlite")
-                    print("Full URL SQlite file: \(fullUrl)")
-                    do {
-                        try FileManager.default.moveItem(at: tempLocation, to: fullUrl!)
-                    } catch CocoaError.fileReadNoSuchFile {
-                        print("No such file")
-                    } catch {
-                        print("Error downloading file : \(error)")
-                    }
-                    DispatchQueue.main.async(execute: { () -> Void in
-                        self.triggerSegue()
-                        self.loaderBackgroundView.isHidden = true
-//                        self.activityIndicator.effectView.removeFromSuperview()
-                    })
-                }
+        let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+            let directoryURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let file = directoryURL.appendingPathComponent("\(cityId).sqlite", isDirectory: false)
+            return (file, [.createIntermediateDirectories, .removePreviousFile])
+        }
+        
+        Alamofire.download(Constants.apiUrlCity + cityId, method: .get, parameters: nil, encoding: JSONEncoding.default, to: destination).responseJSON { response in
+            DispatchQueue.main.async(execute: { () -> Void in
+                self.triggerSegue()
+                self.loaderBackgroundView.isHidden = true
+                //                        self.activityIndicator.effectView.removeFromSuperview()
             })
-            task.resume()
-        })
+        }
+        
+//        let url = URL(string: Constants.apiUrlCity + cityId)
+//        let downloadRequest = URLRequest(url: url!)
+//        let session = URLSession.shared
+//
+//        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+//        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+//        backgroundQueue.async(execute: {
+//            let task = session.downloadTask(with: downloadRequest, completionHandler: {url, response, error -> Void in
+//                if(error != nil) {
+//                    print(error!.localizedDescription)
+//                } else {
+//                    guard  let tempLocation = url, error == nil else { return }
+//                    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+//                    let fullUrl = documentDirectory?.appendingPathComponent("\(cityId).sqlite")
+//                    print("Full URL SQlite file: \(fullUrl)")
+//                    do {
+//                        try FileManager.default.moveItem(at: tempLocation, to: fullUrl!)
+//                    } catch CocoaError.fileReadNoSuchFile {
+//                        print("No such file")
+//                    } catch {
+//                        print("Error downloading file : \(error)")
+//                    }
+//                    DispatchQueue.main.async(execute: { () -> Void in
+//                        self.triggerSegue()
+//                        self.loaderBackgroundView.isHidden = true
+////                        self.activityIndicator.effectView.removeFromSuperview()
+//                    })
+//                }
+//            })
+//            task.resume()
+//        })
     }
 }
 

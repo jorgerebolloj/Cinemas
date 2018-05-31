@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import FMDB
+import Alamofire
 //import TNImageSliderViewController
 // Deleted TNImageSliderViewController as class of GalleryViewController.swift
 
@@ -105,24 +106,30 @@ class GalleryViewController: UIViewController {
     }
     
     func requestImage(_ imageName: String) {
-        let url = URL(string: Constants.apiUrlGallery + imageName)
-        let session = URLSession.shared
+        Alamofire.request(Constants.apiUrlGallery + imageName).responseData { response in
+            if let data = response.result.value {
+                self.saveImage(data)
+            }
+        }
         
-        let qualityOfServiceClass = DispatchQoS.QoSClass.background
-        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
-        backgroundQueue.async(execute: {
-            let task = session.dataTask(with: url!, completionHandler: {data, response, error -> Void in
-                if(error != nil) {
-                    print(error!.localizedDescription)
-                } else {
-                    let nsdata:Data = NSData(data: data!) as Data
-                    do {
-                        self.saveImage(nsdata)
-                    }
-                }
-            })
-            task.resume()
-        })
+//        let url = URL(string: Constants.apiUrlGallery + imageName)
+//        let session = URLSession.shared
+//        
+//        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+//        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+//        backgroundQueue.async(execute: {
+//            let task = session.dataTask(with: url!, completionHandler: {data, response, error -> Void in
+//                if(error != nil) {
+//                    print(error!.localizedDescription)
+//                } else {
+//                    let nsdata:Data = NSData(data: data!) as Data
+//                    do {
+//                        self.saveImage(nsdata)
+//                    }
+//                }
+//            })
+//            task.resume()
+//        })
     }
     
     func saveImage(_ imageData: Data) {
