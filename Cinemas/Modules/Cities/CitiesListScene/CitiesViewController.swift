@@ -113,7 +113,7 @@ extension CitiesViewController: UITableViewDataSource, UITableViewDelegate {
             return (file, [.createIntermediateDirectories, .removePreviousFile])
         }
         
-        Alamofire.download(Constants.apiUrlCity + cityId, method: .get, parameters: nil, encoding: JSONEncoding.default, to: destination).responseJSON { response in
+        Alamofire.download(Constants.apiUrlCity + cityId, to: destination).response { response in
             DispatchQueue.main.async(execute: { () -> Void in
                 self.triggerSegue()
                 self.loaderBackgroundView.isHidden = true
