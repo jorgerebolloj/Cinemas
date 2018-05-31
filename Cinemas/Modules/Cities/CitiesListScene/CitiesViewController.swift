@@ -120,5 +120,6 @@ extension CitiesViewController: UITableViewDataSource, UITableViewDelegate {
                 //                        self.activityIndicator.effectView.removeFromSuperview()
             })
         }
+    }
 }
 
