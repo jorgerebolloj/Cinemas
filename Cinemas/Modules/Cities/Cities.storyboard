@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="DLr-Pj-5hy">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Cities View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="CitiesViewController" customModule="Cinemas" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="REP-F1-Mrd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="separatorColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CityCell" id="TsP-yX-2d5" customClass="CityTableViewCell" customModule="Cinemas" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TsP-yX-2d5" id="daC-db-d5G">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWx-Sg-6ke">
+                                                    <rect key="frame" x="15" y="11" width="345" height="22"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <color key="textColor" red="0.99215686274509807" green="0.72156862745098038" blue="0.15294117647058825" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="TWx-Sg-6ke" firstAttribute="top" secondItem="daC-db-d5G" secondAttribute="topMargin" id="CTj-Aa-L3y"/>
+                                                <constraint firstItem="TWx-Sg-6ke" firstAttribute="bottom" secondItem="daC-db-d5G" secondAttribute="bottomMargin" id="UCK-t2-f8w"/>
+                                                <constraint firstItem="TWx-Sg-6ke" firstAttribute="trailing" secondItem="daC-db-d5G" secondAttribute="trailingMargin" id="Vxu-sc-sUX"/>
+                                                <constraint firstItem="TWx-Sg-6ke" firstAttribute="leading" secondItem="daC-db-d5G" secondAttribute="leadingMargin" id="z8f-VK-W8U"/>
+                                            </constraints>
+                                            <variation key="default">
+                                                <mask key="subviews">
+                                                    <exclude reference="TWx-Sg-6ke"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <exclude reference="CTj-Aa-L3y"/>
+                                                    <exclude reference="UCK-t2-f8w"/>
+                                                    <exclude reference="Vxu-sc-sUX"/>
+                                                    <exclude reference="z8f-VK-W8U"/>
+                                                </mask>
+                                            </variation>
+                                            <variation key="heightClass=regular">
+                                                <mask key="subviews">
+                                                    <include reference="TWx-Sg-6ke"/>
+                                                </mask>
+                                                <mask key="constraints">
+                                                    <include reference="CTj-Aa-L3y"/>
+                                                    <include reference="UCK-t2-f8w"/>
+                                                    <include reference="Vxu-sc-sUX"/>
+                                                    <include reference="z8f-VK-W8U"/>
+                                                </mask>
+                                            </variation>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.0" green="0.34901960780000002" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="cityLabel" destination="TWx-Sg-6ke" id="Yrk-YS-ZkV"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="KAu-P3-xYc"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="JH7-LN-frc"/>
+                                </connections>
+                            </tableView>
+                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S58-r8-1F1">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.031045561656355858" green="0.26690596342086792" blue="0.5714411735534668" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="REP-F1-Mrd" secondAttribute="trailing" id="2T7-O0-AwO"/>
+                            <constraint firstItem="S58-r8-1F1" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="CwV-f6-uRc"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="S58-r8-1F1" secondAttribute="bottom" id="FwF-7p-NfD"/>
+                            <constraint firstItem="REP-F1-Mrd" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="JK6-Sh-Kxb"/>
+                            <constraint firstItem="S58-r8-1F1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="KB1-9t-Kg9"/>
+                            <constraint firstItem="REP-F1-Mrd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="PEY-fr-0Fi"/>
+                            <constraint firstAttribute="trailing" secondItem="S58-r8-1F1" secondAttribute="trailing" id="gJY-eH-Oqz"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="REP-F1-Mrd" secondAttribute="bottom" id="x8A-EF-OIH"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="REP-F1-Mrd"/>
+                                <exclude reference="S58-r8-1F1"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="FwF-7p-NfD"/>
+                                <exclude reference="x8A-EF-OIH"/>
+                                <exclude reference="2T7-O0-AwO"/>
+                                <exclude reference="JK6-Sh-Kxb"/>
+                                <exclude reference="PEY-fr-0Fi"/>
+                                <exclude reference="CwV-f6-uRc"/>
+                                <exclude reference="KB1-9t-Kg9"/>
+                                <exclude reference="gJY-eH-Oqz"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular">
+                            <mask key="subviews">
+                                <include reference="REP-F1-Mrd"/>
+                                <include reference="S58-r8-1F1"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="FwF-7p-NfD"/>
+                                <include reference="x8A-EF-OIH"/>
+                                <include reference="2T7-O0-AwO"/>
+                                <include reference="JK6-Sh-Kxb"/>
+                                <include reference="PEY-fr-0Fi"/>
+                                <include reference="CwV-f6-uRc"/>
+                                <include reference="KB1-9t-Kg9"/>
+                                <include reference="gJY-eH-Oqz"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <navigationItem key="navigationItem" id="WmX-7r-aNy"/>
+                    <connections>
+                        <outlet property="citiesTableView" destination="REP-F1-Mrd" id="ocG-k8-YWl"/>
+                        <outlet property="loaderBackgroundView" destination="S58-r8-1F1" id="gZc-e3-OM0"/>
+                        <segue destination="hO1-dc-hWY" kind="show" identifier="ComplexSegue" id="L4h-is-FTo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="985" y="-567"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UPi-Yf-yaB">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="DLr-Pj-5hy" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="blackTranslucent" id="x2b-Jh-ok1">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.99215686270000003" green="0.72156862749999995" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="qAT-7T-h8v"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MiP-fP-Y4G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="276" y="-567"/>
+        </scene>
+        <!--MovieTheaters-->
+        <scene sceneID="1X3-Mq-uaM">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MovieTheaters" id="hO1-dc-hWY" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AwP-1F-y3Q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1699" y="-567"/>
+        </scene>
+    </scenes>
+</document>
