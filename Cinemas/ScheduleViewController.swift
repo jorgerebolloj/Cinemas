@@ -19,14 +19,14 @@ class ScheduleViewController: UIViewController {
     var queue: FMDatabaseQueue?
     var cityId: String!
     var movieInfo = [String:String]()
-    let activityIndicator = ActivityIndicator()
+//    let activityIndicator = ActivityIndicator()
     var todayString: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Horarios"
-        self.view.addSubview(activityIndicator)
-        activityIndicator.activityIndicator("Cargando Horarios...")
+//        self.view.addSubview(activityIndicator)
+//        activityIndicator.activityIndicator("Cargando Horarios...")
         
         //model validation
         /*var count = 0
@@ -42,7 +42,7 @@ class ScheduleViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Horarios"
         self.loaderBackgroundView.isHidden = true
-        self.activityIndicator.effectView.removeFromSuperview()
+//        self.activityIndicator.effectView.removeFromSuperview()
     }
     
     override func didReceiveMemoryWarning() {

@@ -19,13 +19,13 @@ class ComplexViewController: UIViewController {
     var queue: FMDatabaseQueue?
     var cityId: String!
     var selectedComplex = [String:String]()
-    let activityIndicator = ActivityIndicator()
+//    let activityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Complejos"
-        self.view.addSubview(activityIndicator)
-        activityIndicator.activityIndicator("Cargando Complejos...")
+//        self.view.addSubview(activityIndicator)
+//        activityIndicator.activityIndicator("Cargando Complejos...")
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,7 +75,7 @@ class ComplexViewController: UIViewController {
             DispatchQueue.main.async(execute: { () -> Void in
                 self.complexTableView.reloadData()
                 self.loaderBackgroundView.isHidden = true
-                self.activityIndicator.effectView.removeFromSuperview()
+//                self.activityIndicator.effectView.removeFromSuperview()
             })
             
             database.close()
@@ -84,8 +84,8 @@ class ComplexViewController: UIViewController {
     
     @IBAction func shomMapAction(_ sender: AnyObject) {
         self.loaderBackgroundView.isHidden = false
-        self.view.addSubview(activityIndicator)
-        activityIndicator.activityIndicator("Solicitando Mapa...")
+//        self.view.addSubview(activityIndicator)
+//        activityIndicator.activityIndicator("Solicitando Mapa...")
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
@@ -94,14 +94,14 @@ class ComplexViewController: UIViewController {
             if self.complex.isEmpty == false {
                 billboardViewController.databaseQueue(self.cityId!, complexMapInfo: self.selectedComplex)
                 self.loaderBackgroundView.isHidden = true
-                self.activityIndicator.effectView.removeFromSuperview()
+//                self.activityIndicator.effectView.removeFromSuperview()
             }
         } else if (segue.identifier == "MapSegue") {
             let mapViewController = segue.destination as! MapViewController
             if self.complex.isEmpty == false {
                 mapViewController.prepareMapInfo(self.complex)
                 self.loaderBackgroundView.isHidden = true
-                self.activityIndicator.effectView.removeFromSuperview()
+//                self.activityIndicator.effectView.removeFromSuperview()
             }
         }
     }
@@ -130,7 +130,7 @@ extension ComplexViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.loaderBackgroundView.isHidden = false
-        activityIndicator.activityIndicator("Solicitando Cartelera...")
+//        activityIndicator.activityIndicator("Solicitando Cartelera...")
         let complex = self.complex[indexPath.row]
         self.selectedComplex = complex as! [String : String]
         print("selectedComplex= \(self.selectedComplex)")

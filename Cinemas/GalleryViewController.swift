@@ -18,7 +18,7 @@ class GalleryViewController: UIViewController {
     var queue: FMDatabaseQueue?
     var cityId: String!
     var movieInfo = [String:String]()
-    let activityIndicator = ActivityIndicator()
+//    let activityIndicator = ActivityIndicator()
 //    var imageSliderViewController:TNImageSliderViewController!
     var imagesNames = [String]()
     var images = [NSManagedObject]()
@@ -27,8 +27,8 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Galería"
-        self.view.addSubview(activityIndicator)
-        activityIndicator.activityIndicator("Cargando Galería...")
+//        self.view.addSubview(activityIndicator)
+//        activityIndicator.activityIndicator("Cargando Galería...")
         
         print(self.imagesNames)
         
@@ -60,7 +60,7 @@ class GalleryViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.loaderBackgroundView.isHidden = true
-        self.activityIndicator.effectView.removeFromSuperview()
+//        self.activityIndicator.effectView.removeFromSuperview()
     }
     
     override func didReceiveMemoryWarning() {

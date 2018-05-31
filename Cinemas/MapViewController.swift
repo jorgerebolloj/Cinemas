@@ -14,13 +14,13 @@ class MapViewController: UIViewController {
     @IBOutlet weak var map: MKMapView!
     
     var complexMaps = [ComplexLocation]()
-    let activityIndicator = ActivityIndicator()
+//    let activityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Mapa de Complejos"
-        self.view.addSubview(activityIndicator)
-        activityIndicator.activityIndicator("Cargando Mapa...")
+//        self.view.addSubview(activityIndicator)
+//        activityIndicator.activityIndicator("Cargando Mapa...")
         self.setComplexMap()
     }
     
@@ -57,7 +57,7 @@ class MapViewController: UIViewController {
         }
         map.setVisibleMapRect(zoomRect, edgePadding: UIEdgeInsetsMake(10, 10, 10, 10), animated: true)
         self.loaderBackgroundView.isHidden = true
-        self.activityIndicator.effectView.removeFromSuperview()
+//        self.activityIndicator.effectView.removeFromSuperview()
     }
     
     override func didReceiveMemoryWarning() {

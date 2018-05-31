@@ -15,12 +15,12 @@ class MovieViewController: UIViewController {
     @IBOutlet weak var directorLabel: UILabel!
     
     var movieInfo = [String:String]()
-    let activityIndicator = ActivityIndicator()
+//    let activityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.addSubview(activityIndicator)
-        activityIndicator.activityIndicator("Cargando Película...")
+//        self.view.addSubview(activityIndicator)
+//        activityIndicator.activityIndicator("Cargando Película...")
         self.sipnosisLabel.text = movieInfo["sinopsis"] == "" ? "Sinopsis: No disponible" : movieInfo["sinopsis"]
         self.actorsLabel.text = movieInfo["actors"] == "" ? "Actores: No disponible" : movieInfo["actors"]
         self.directorLabel.text = movieInfo["director"] == "" ? "Director: No disponible" : movieInfo["actors"]
@@ -28,7 +28,7 @@ class MovieViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.loaderBackgroundView.isHidden = true
-        self.activityIndicator.effectView.removeFromSuperview()
+//        self.activityIndicator.effectView.removeFromSuperview()
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -17,13 +17,13 @@ class BillboardViewController: UIViewController {
     var queue: FMDatabaseQueue?
     var cityId: String!
     var selectedMovie = [String:String]()
-    let activityIndicator = ActivityIndicator()
+//    let activityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Cartelera"
-        self.view.addSubview(activityIndicator)
-        activityIndicator.activityIndicator("Cargando Cartelera...")
+//        self.view.addSubview(activityIndicator)
+//        activityIndicator.activityIndicator("Cargando Cartelera...")
     }
     
     override func didReceiveMemoryWarning() {
@@ -76,7 +76,7 @@ class BillboardViewController: UIViewController {
             DispatchQueue.main.async(execute: { () -> Void in
                 self.bilboardTableView.reloadData()
                 self.loaderBackgroundView.isHidden = true
-                self.activityIndicator.effectView.removeFromSuperview()
+//                self.activityIndicator.effectView.removeFromSuperview()
             })
             
             database.close()
@@ -94,7 +94,7 @@ class BillboardViewController: UIViewController {
                 galleryViewController.databaseQueue(self.cityId!, movieInfo: self.selectedMovie)
                 scheduleViewController.databaseQueue(self.cityId!, movieInfo: self.selectedMovie)
                 self.loaderBackgroundView.isHidden = true
-                self.activityIndicator.effectView.removeFromSuperview()
+//                self.activityIndicator.effectView.removeFromSuperview()
             }
         }
     }
@@ -123,8 +123,8 @@ extension BillboardViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.loaderBackgroundView.isHidden = false
-        self.view.addSubview(activityIndicator)
-        activityIndicator.activityIndicator("Solicitando Película...")
+//        self.view.addSubview(activityIndicator)
+//        activityIndicator.activityIndicator("Solicitando Película...")
         let movie = self.billboard[indexPath.row]
         self.selectedMovie = movie as! [String : String]
         print("selectedMovie= \(self.selectedMovie)")

@@ -15,13 +15,13 @@ class CitiesViewController: UIViewController {
     
     var cities = [NSManagedObject]()
     var cityId:String!
-    let activityIndicator = ActivityIndicator()
+//    let activityIndicator = ActivityIndicator()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Ciudades"
-        self.view.addSubview(activityIndicator)
-        activityIndicator.activityIndicator("Cargando Ciudades...")
+//        self.view.addSubview(activityIndicator)
+//        activityIndicator.activityIndicator("Cargando Ciudades...")
         
         let url = URL(string: Constants.apiUrlCities)
         let session = URLSession.shared
@@ -46,7 +46,7 @@ class CitiesViewController: UIViewController {
                                 DispatchQueue.main.async(execute: { () -> Void in
                                     self.citiesTableView.reloadData()
                                     self.loaderBackgroundView.isHidden = true
-                                    self.activityIndicator.effectView.removeFromSuperview()
+//                                    self.activityIndicator.effectView.removeFromSuperview()
                                 })
                             })
                         }
@@ -118,7 +118,7 @@ extension CitiesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.loaderBackgroundView.isHidden = false
-        activityIndicator.activityIndicator("Solicitando Complejos...")
+//        activityIndicator.activityIndicator("Solicitando Complejos...")
         let city = cities[indexPath.row]
         let cityId = String(describing: city.value(forKey: "Id")!)
         self.cityId = cityId
@@ -148,7 +148,7 @@ extension CitiesViewController: UITableViewDataSource, UITableViewDelegate {
                     DispatchQueue.main.async(execute: { () -> Void in
                         self.triggerSegue()
                         self.loaderBackgroundView.isHidden = true
-                        self.activityIndicator.effectView.removeFromSuperview()
+//                        self.activityIndicator.effectView.removeFromSuperview()
                     })
                 }
             })
