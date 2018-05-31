@@ -7,6 +7,6 @@ target 'Cinemas' do
 
   # Pods for Cinemas
   pod 'FMDB'
-  pod 'TNImageSliderViewController'
+  #pod 'TNImageSliderViewController'
 
 end

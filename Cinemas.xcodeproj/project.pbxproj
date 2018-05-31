@@ -194,6 +194,8 @@
 				TargetAttributes = {
 					3003F7841EDFA3ED0004297E = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = QGMJDWHD6Q;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -242,12 +244,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Cinemas/Pods-Cinemas-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/FMDB/FMDB.framework",
-				"${BUILT_PRODUCTS_DIR}/TNImageSliderViewController/TNImageSliderViewController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FMDB.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TNImageSliderViewController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -409,11 +409,13 @@
 			baseConfigurationReference = EB16FF41BC4978D7A35E8DCA /* Pods-Cinemas.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = QGMJDWHD6Q;
 				INFOPLIST_FILE = Cinemas/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.personal.Cinemas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -422,11 +424,13 @@
 			baseConfigurationReference = 86E7A1CCAC2C9D97812B6566 /* Pods-Cinemas.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = QGMJDWHD6Q;
 				INFOPLIST_FILE = Cinemas/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.personal.Cinemas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

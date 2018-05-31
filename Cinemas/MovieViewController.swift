@@ -26,12 +26,12 @@ class MovieViewController: UIViewController {
         self.directorLabel.text = movieInfo["director"] == "" ? "Director: No disponible" : movieInfo["actors"]
     }
     
-    override func viewDidAppear(animated: Bool) {
-        self.loaderBackgroundView.hidden = true
+    override func viewDidAppear(_ animated: Bool) {
+        self.loaderBackgroundView.isHidden = true
         self.activityIndicator.effectView.removeFromSuperview()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.navigationItem.title = movieInfo["title"]
     }
@@ -40,7 +40,7 @@ class MovieViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func databaseQueue(movieInfo: [String:String]) {
+    func databaseQueue(_ movieInfo: [String:String]) {
         self.movieInfo = movieInfo
     }
 }

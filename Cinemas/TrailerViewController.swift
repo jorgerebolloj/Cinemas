@@ -20,12 +20,12 @@ class TrailerViewController: UIViewController {
         activityIndicator.activityIndicator("Cargando Trailer...")
     }
     
-    override func viewDidAppear(animated: Bool) {
-        self.loaderBackgroundView.hidden = true
+    override func viewDidAppear(_ animated: Bool) {
+        self.loaderBackgroundView.isHidden = true
         self.activityIndicator.effectView.removeFromSuperview()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.navigationItem.title = "Trailer"
     }

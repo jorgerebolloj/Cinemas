@@ -39,9 +39,9 @@ class ScheduleViewController: UIViewController {
         print("Total counts: \(times.count)")*/
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         self.tabBarController?.navigationItem.title = "Horarios"
-        self.loaderBackgroundView.hidden = true
+        self.loaderBackgroundView.isHidden = true
         self.activityIndicator.effectView.removeFromSuperview()
     }
     
@@ -49,19 +49,19 @@ class ScheduleViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func databaseQueue(cityId: String, movieInfo: [String:String]) {
-        let todaysDate:NSDate = NSDate()
-        let dateFormatter:NSDateFormatter = NSDateFormatter()
+    func databaseQueue(_ cityId: String, movieInfo: [String:String]) {
+        let todaysDate:Date = Date()
+        let dateFormatter:DateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        self.todayString = dateFormatter.stringFromDate(todaysDate)
+        self.todayString = dateFormatter.string(from: todaysDate)
         
         self.cityId = cityId
         self.movieInfo = movieInfo
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
-            let documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first
-            let fullUrl = documentDirectory?.URLByAppendingPathComponent("\(cityId).sqlite")
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            let fullUrl = documentDirectory?.appendingPathComponent("\(cityId).sqlite")
             
             let database = FMDatabase(path: fullUrl!.path)
             
@@ -77,11 +77,11 @@ class ScheduleViewController: UIViewController {
                 let rs = try database.executeQuery(queryString, values: nil)
                 while rs.next() {
                     var timesDictionary = [String: String]()
-                    let time = rs.stringForColumn("Horario")
-                    let room = rs.stringForColumn("Sala")
+                    let time = rs.string(forColumn: "Horario")
+                    let room = rs.string(forColumn: "Sala")
                     timesDictionary["time"] = time
                     timesDictionary["room"] = room
-                    self.times.append(timesDictionary)
+                    self.times.append(timesDictionary as AnyObject)
                 }
             } catch let error as NSError {
                 print("failed: \(error.localizedDescription)")
@@ -94,16 +94,16 @@ class ScheduleViewController: UIViewController {
 
 extension ScheduleViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
         return self.times.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ScheduleCell", forIndexPath: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ScheduleCell", for: indexPath)
         //let cell = tableView.dequeueReusableCellWithIdentifier("ScheduleCell", forIndexPath: indexPath) as! ScheduleTableViewCell
         let timeInfo = self.times[indexPath.row]
         cell.textLabel?.text = "Horario: \(timeInfo["time"]!) hrs. Sala: \(timeInfo["room"]!)"
@@ -114,41 +114,41 @@ extension ScheduleViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let timeInfo = self.times[indexPath.row]
         print("Quiero compartirles la película: '\(self.movieInfo["title"]!)', Sala: \(timeInfo["room"]!) a las \(timeInfo["time"]!)")
-        let actionSheet = UIAlertController(title: "", message: "Compartir: '\(self.movieInfo["title"]!)', Sala: \(timeInfo["room"]!) a las \(timeInfo["time"]!)", preferredStyle: UIAlertControllerStyle.ActionSheet)
-        let tweetAction = UIAlertAction(title: "En Twitter", style: UIAlertActionStyle.Default) { (action) -> Void in
-            if(SLComposeViewController.isAvailableForServiceType(SLServiceTypeTwitter)) {
+        let actionSheet = UIAlertController(title: "", message: "Compartir: '\(self.movieInfo["title"]!)', Sala: \(timeInfo["room"]!) a las \(timeInfo["time"]!)", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let tweetAction = UIAlertAction(title: "En Twitter", style: UIAlertActionStyle.default) { (action) -> Void in
+            if(SLComposeViewController.isAvailable(forServiceType: SLServiceTypeTwitter)) {
                 let tweet = SLComposeViewController(forServiceType: SLServiceTypeTwitter)
-                tweet.setInitialText("Quiero compartirles la película: '\(self.movieInfo["title"]!)', Sala: \(timeInfo["room"]!) a las \(timeInfo["time"]!)")
-                tweet.addImage(UIImage(named: "cinemas-logo.png"))
-                self.presentViewController(tweet, animated: true, completion: nil)
+                tweet?.setInitialText("Quiero compartirles la película: '\(self.movieInfo["title"]!)', Sala: \(timeInfo["room"]!) a las \(timeInfo["time"]!)")
+                tweet?.add(UIImage(named: "cinemas-logo.png"))
+                self.present(tweet!, animated: true, completion: nil)
             } else {
-                let alert = UIAlertController(title: "Twitter", message: "Twitter no está disponible", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Twitter", message: "Twitter no está disponible", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
-        let facebookAction = UIAlertAction(title: "En Facebook", style: UIAlertActionStyle.Default) { (action) -> Void in
-            if (SLComposeViewController.isAvailableForServiceType(SLServiceTypeFacebook))
+        let facebookAction = UIAlertAction(title: "En Facebook", style: UIAlertActionStyle.default) { (action) -> Void in
+            if (SLComposeViewController.isAvailable(forServiceType: SLServiceTypeFacebook))
             {
                 let post = SLComposeViewController(forServiceType: (SLServiceTypeFacebook))
-                post.setInitialText("Quiero compartirles la película: '\(self.movieInfo["title"]!)', Sala: \(timeInfo["room"]!) a las \(timeInfo["time"]!)")
-                post.addImage(UIImage(named: "cinemas-logo.png"))
-                self.presentViewController(post, animated: true, completion: nil)
+                post?.setInitialText("Quiero compartirles la película: '\(self.movieInfo["title"]!)', Sala: \(timeInfo["room"]!) a las \(timeInfo["time"]!)")
+                post?.add(UIImage(named: "cinemas-logo.png"))
+                self.present(post!, animated: true, completion: nil)
             } else {
-                let alert = UIAlertController(title: "Facebook", message: "Facebook no está disponible", preferredStyle: UIAlertControllerStyle.Alert)
-                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
-                self.presentViewController(alert, animated: true, completion: nil)
+                let alert = UIAlertController(title: "Facebook", message: "Facebook no está disponible", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
             }
         }
-        let dismissAction = UIAlertAction(title: "Cerrar", style: UIAlertActionStyle.Cancel) { (action) -> Void in
+        let dismissAction = UIAlertAction(title: "Cerrar", style: UIAlertActionStyle.cancel) { (action) -> Void in
             
         }
         actionSheet.addAction(tweetAction)
         actionSheet.addAction(facebookAction)
         actionSheet.addAction(dismissAction)
-        presentViewController(actionSheet, animated: true, completion: nil)
+        present(actionSheet, animated: true, completion: nil)
     }
 }

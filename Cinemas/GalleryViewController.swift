@@ -9,7 +9,8 @@
 import UIKit
 import CoreData
 import FMDB
-import TNImageSliderViewController
+//import TNImageSliderViewController
+// Deleted TNImageSliderViewController as class of GalleryViewController.swift
 
 class GalleryViewController: UIViewController {
     @IBOutlet weak var loaderBackgroundView: UIView!
@@ -18,7 +19,7 @@ class GalleryViewController: UIViewController {
     var cityId: String!
     var movieInfo = [String:String]()
     let activityIndicator = ActivityIndicator()
-    var imageSliderViewController:TNImageSliderViewController!
+//    var imageSliderViewController:TNImageSliderViewController!
     var imagesNames = [String]()
     var images = [NSManagedObject]()
     var imagesArray = [UIImage]()
@@ -32,33 +33,33 @@ class GalleryViewController: UIViewController {
         print(self.imagesNames)
         
         for imageData in images {
-            let image = imageData.valueForKey("imageMovie") as! NSData
+            let image = imageData.value(forKey: "imageMovie") as! Data
             imagesArray.append(UIImage(data: image)!)
         }
         
         if images.isEmpty == false {
-            imageSliderViewController.images = imagesArray
-            print(imageSliderViewController.images.count)
+//            TrailerViewController.images = imagesArray
+//            print(imageSliderViewController.images.count)
             
-            var options = TNImageSliderViewOptions()
-            options.pageControlHidden = false
-            options.scrollDirection = .Horizontal
-            options.pageControlCurrentIndicatorTintColor = UIColor.yellowColor()
-            options.autoSlideIntervalInSeconds = 2
-            options.shouldStartFromBeginning = true
-            options.imageContentMode = .ScaleAspectFit
-            
-            imageSliderViewController.options = options
+//            var options = TNImageSliderViewOptions()
+//            options.pageControlHidden = false
+//            options.scrollDirection = .horizontal
+//            options.pageControlCurrentIndicatorTintColor = UIColor.yellow
+//            options.autoSlideIntervalInSeconds = 2
+//            options.shouldStartFromBeginning = true
+//            options.imageContentMode = .scaleAspectFit
+//            
+//            imageSliderViewController.options = options
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.navigationItem.title = "Galería"
     }
     
-    override func viewDidAppear(animated: Bool) {
-        self.loaderBackgroundView.hidden = true
+    override func viewDidAppear(_ animated: Bool) {
+        self.loaderBackgroundView.isHidden = true
         self.activityIndicator.effectView.removeFromSuperview()
     }
     
@@ -66,20 +67,20 @@ class GalleryViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if( segue.identifier == "ImageSliderSegue" ) {
-            imageSliderViewController = segue.destinationViewController as! TNImageSliderViewController
+//            imageSliderViewController = segue.destination as! TNImageSliderViewController
         }
     }
     
-    func databaseQueue(cityId: String, movieInfo: [String:String]) {
+    func databaseQueue(_ cityId: String, movieInfo: [String:String]) {
         self.cityId = cityId
         self.movieInfo = movieInfo
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
-            let documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first
-            let fullUrl = documentDirectory?.URLByAppendingPathComponent("\(cityId).sqlite")
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            let fullUrl = documentDirectory?.appendingPathComponent("\(cityId).sqlite")
             
             let database = FMDatabase(path: fullUrl!.path)
             
@@ -91,9 +92,9 @@ class GalleryViewController: UIViewController {
             do {
                 let rs = try database.executeQuery("select * from Multimedia where IdPelicula = \(self.movieInfo["movie"]!)  and Tipo = 'Imagen'", values: nil)
                 while rs.next() {
-                    let imageName = rs.stringForColumn("Archivo")
-                    self.imagesNames.append(imageName)
-                    self.requestImage(imageName)
+                    let imageName = rs.string(forColumn: "Archivo")
+                    self.imagesNames.append(imageName!)
+                    self.requestImage(imageName!)
                 }
             } catch let error as NSError {
                 print("failed: \(error.localizedDescription)")
@@ -103,18 +104,18 @@ class GalleryViewController: UIViewController {
         })
     }
     
-    func requestImage(imageName: String) {
-        let url = NSURL(string: Constants.apiUrlGallery + imageName)
-        let session = NSURLSession.sharedSession()
+    func requestImage(_ imageName: String) {
+        let url = URL(string: Constants.apiUrlGallery + imageName)
+        let session = URLSession.shared
         
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
-            let task = session.dataTaskWithURL(url!, completionHandler: {data, response, error -> Void in
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
+            let task = session.dataTask(with: url!, completionHandler: {data, response, error -> Void in
                 if(error != nil) {
                     print(error!.localizedDescription)
                 } else {
-                    let nsdata:NSData = NSData(data: data!)
+                    let nsdata:Data = NSData(data: data!) as Data
                     do {
                         self.saveImage(nsdata)
                     }
@@ -124,12 +125,12 @@ class GalleryViewController: UIViewController {
         })
     }
     
-    func saveImage(imageData: NSData) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    func saveImage(_ imageData: Data) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let entity = NSEntityDescription.entityForName("MovieImages", inManagedObjectContext: managedContext)
-        let imageMovie = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let entity = NSEntityDescription.entity(forEntityName: "MovieImages", in: managedContext)
+        let imageMovie = NSManagedObject(entity: entity!, insertInto: managedContext)
         imageMovie.setValue(imageData, forKey: "imageMovie")
         
         do {

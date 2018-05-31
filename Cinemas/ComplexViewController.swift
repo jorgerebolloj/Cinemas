@@ -32,13 +32,13 @@ class ComplexViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    func databaseQueue(cityId: String) {
+    func databaseQueue(_ cityId: String) {
         self.cityId = cityId
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
-            let documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first
-            let fullUrl = documentDirectory?.URLByAppendingPathComponent("\(cityId).sqlite")
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
+            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+            let fullUrl = documentDirectory?.appendingPathComponent("\(cityId).sqlite")
             
             let database = FMDatabase(path: fullUrl!.path)
             
@@ -51,34 +51,30 @@ class ComplexViewController: UIViewController {
                 let rs = try database.executeQuery("select IdComplejoVista, Nombre, Direccion, Latitud, Longitud, Telefono from Complejo", values: nil)
                 while rs.next() {
                     var complexDictionary = [String: String]()
-                    let idComplex = rs.stringForColumn("IdComplejoVista")
-                    let name = rs.stringForColumn("Nombre")
-                    let address = rs.stringForColumn("Direccion")
-                    let latitude = rs.stringForColumn("Latitud")
-                    let trimmedLatitude = latitude.stringByTrimmingCharactersInSet(
-                        NSCharacterSet.whitespaceAndNewlineCharacterSet()
-                    )
-                    let longitude = rs.stringForColumn("Longitud")
-                    let trimmedLongitude = longitude.stringByTrimmingCharactersInSet(
-                        NSCharacterSet.whitespaceAndNewlineCharacterSet()
-                    )
-                    let telephone = rs.stringForColumn("Telefono")
+                    let idComplex = rs.string(forColumn: "IdComplejoVista")
+                    let name = rs.string(forColumn: "Nombre")
+                    let address = rs.string(forColumn: "Direccion")
+                    let latitude = rs.string(forColumn: "Latitud")
+                    let trimmedLatitude = latitude?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    let longitude = rs.string(forColumn: "Longitud")
+                    let trimmedLongitude = longitude?.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+                    let telephone = rs.string(forColumn: "Telefono")
                     complexDictionary["idComplex"] = idComplex
                     complexDictionary["name"] = name
                     complexDictionary["address"] = address
                     complexDictionary["latitude"] = trimmedLatitude
                     complexDictionary["longitude"] = trimmedLongitude
                     complexDictionary["telephone"] = telephone
-                    self.complex.append(complexDictionary)
+                    self.complex.append(complexDictionary as AnyObject)
                     print(self.complex)
                 }
             } catch let error as NSError {
                 print("failed: \(error.localizedDescription)")
             }
             
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            DispatchQueue.main.async(execute: { () -> Void in
                 self.complexTableView.reloadData()
-                self.loaderBackgroundView.hidden = true
+                self.loaderBackgroundView.isHidden = true
                 self.activityIndicator.effectView.removeFromSuperview()
             })
             
@@ -86,54 +82,54 @@ class ComplexViewController: UIViewController {
         })
     }
     
-    @IBAction func shomMapAction(sender: AnyObject) {
-        self.loaderBackgroundView.hidden = false
+    @IBAction func shomMapAction(_ sender: AnyObject) {
+        self.loaderBackgroundView.isHidden = false
         self.view.addSubview(activityIndicator)
         activityIndicator.activityIndicator("Solicitando Mapa...")
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if (segue.identifier == "BillboardSegue") {
-            let billboardViewController = segue.destinationViewController as! BillboardViewController
+            let billboardViewController = segue.destination as! BillboardViewController
             if self.complex.isEmpty == false {
                 billboardViewController.databaseQueue(self.cityId!, complexMapInfo: self.selectedComplex)
-                self.loaderBackgroundView.hidden = true
+                self.loaderBackgroundView.isHidden = true
                 self.activityIndicator.effectView.removeFromSuperview()
             }
         } else if (segue.identifier == "MapSegue") {
-            let mapViewController = segue.destinationViewController as! MapViewController
+            let mapViewController = segue.destination as! MapViewController
             if self.complex.isEmpty == false {
                 mapViewController.prepareMapInfo(self.complex)
-                self.loaderBackgroundView.hidden = true
+                self.loaderBackgroundView.isHidden = true
                 self.activityIndicator.effectView.removeFromSuperview()
             }
         }
     }
     
     func triggerSegue() {
-        performSegueWithIdentifier("BillboardSegue", sender: nil)
+        performSegue(withIdentifier: "BillboardSegue", sender: nil)
     }
 }
 
 extension ComplexViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
         return self.complex.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("ComplexCell") as! ComplexTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ComplexCell") as! ComplexTableViewCell
         let complex = self.complex[indexPath.row]
-        cell.complexNameLabel.text = complex.valueForKey("name") as? String
-        cell.complexAddressLabel.text = complex.valueForKey("address") as? String
+        cell.complexNameLabel.text = complex.value(forKey: "name") as? String
+        cell.complexAddressLabel.text = complex.value(forKey: "address") as? String
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.loaderBackgroundView.hidden = false
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.loaderBackgroundView.isHidden = false
         activityIndicator.activityIndicator("Solicitando Cartelera...")
         let complex = self.complex[indexPath.row]
         self.selectedComplex = complex as! [String : String]

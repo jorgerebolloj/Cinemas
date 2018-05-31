@@ -23,29 +23,29 @@ class CitiesViewController: UIViewController {
         self.view.addSubview(activityIndicator)
         activityIndicator.activityIndicator("Cargando Ciudades...")
         
-        let url = NSURL(string: Constants.apiUrlCities)
-        let session = NSURLSession.sharedSession()
+        let url = URL(string: Constants.apiUrlCities)
+        let session = URLSession.shared
         
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
-            let task = session.dataTaskWithURL(url!, completionHandler: {data, response, error -> Void in
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
+            let task = session.dataTask(with: url!, completionHandler: {data, response, error -> Void in
                 if(error != nil) {
                     print(error!.localizedDescription)
                 } else {
-                    let nsdata:NSData = NSData(data: data!)
+                    let nsdata:Data = NSData(data: data!) as Data
                     do {
-                        let jsonCompleto = try NSJSONSerialization.JSONObjectWithData(nsdata, options: NSJSONReadingOptions.MutableContainers)
+                        let jsonCompleto = try JSONSerialization.jsonObject(with: nsdata, options: JSONSerialization.ReadingOptions.mutableContainers)
                         print("Json Completo\(jsonCompleto)")
                         if let nsArrayJson = jsonCompleto as? NSArray {
-                            nsArrayJson.enumerateObjectsUsingBlock({ objeto, index, stop in
+                            nsArrayJson.enumerateObjects({ objeto, index, stop in
                                 let arrayCity = objeto as! NSDictionary
                                 print("City \(index):\(arrayCity)")
                                 self.saveCity(arrayCity)
                                 
-                                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                                DispatchQueue.main.async(execute: { () -> Void in
                                     self.citiesTableView.reloadData()
-                                    self.loaderBackgroundView.hidden = true
+                                    self.loaderBackgroundView.isHidden = true
                                     self.activityIndicator.effectView.removeFromSuperview()
                                 })
                             })
@@ -59,12 +59,12 @@ class CitiesViewController: UIViewController {
         })
     }
     
-    func saveCity(cityValues: NSDictionary) {
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    func saveCity(_ cityValues: NSDictionary) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
-        let entity = NSEntityDescription.entityForName("City", inManagedObjectContext: managedContext)
-        let city = NSManagedObject(entity: entity!, insertIntoManagedObjectContext: managedContext)
+        let entity = NSEntityDescription.entity(forEntityName: "City", in: managedContext)
+        let city = NSManagedObject(entity: entity!, insertInto: managedContext)
         city.setValue(cityValues["Estado"], forKey: "estado")
         city.setValue(cityValues["Id"], forKey: "id")
         city.setValue(cityValues["IdEstado"], forKey: "idEstado")
@@ -82,9 +82,9 @@ class CitiesViewController: UIViewController {
         }
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any!) {
         if (segue.identifier == "ComplexSegue") {
-            let complexViewController = segue.destinationViewController as! ComplexViewController
+            let complexViewController = segue.destination as! ComplexViewController
             if self.cityId != nil {
                 complexViewController.databaseQueue(self.cityId)
             }
@@ -92,7 +92,7 @@ class CitiesViewController: UIViewController {
     }
     
     func triggerSegue() {
-        performSegueWithIdentifier("ComplexSegue", sender: nil)
+        performSegue(withIdentifier: "ComplexSegue", sender: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -101,53 +101,53 @@ class CitiesViewController: UIViewController {
 }
 
 extension CitiesViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section:Int) -> Int {
         return cities.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("CityCell") as! CityTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CityCell") as! CityTableViewCell
         let city = cities[indexPath.row]
-        cell.cityLabel.text = city.valueForKey("Nombre") as? String
+        cell.cityLabel.text = city.value(forKey: "Nombre") as? String
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.loaderBackgroundView.hidden = false
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.loaderBackgroundView.isHidden = false
         activityIndicator.activityIndicator("Solicitando Complejos...")
         let city = cities[indexPath.row]
-        let cityId = String(city.valueForKey("Id")!)
+        let cityId = String(describing: city.value(forKey: "Id")!)
         self.cityId = cityId
         print("CityId= \(self.cityId)")
-        let url = NSURL(string: Constants.apiUrlCity + cityId)
-        let downloadRequest = NSURLRequest(URL: url!)
-        let session = NSURLSession.sharedSession()
+        let url = URL(string: Constants.apiUrlCity + cityId)
+        let downloadRequest = URLRequest(url: url!)
+        let session = URLSession.shared
         
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
-            let task = session.downloadTaskWithRequest(downloadRequest, completionHandler: {url, response, error -> Void in
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
+            let task = session.downloadTask(with: downloadRequest, completionHandler: {url, response, error -> Void in
                 if(error != nil) {
                     print(error!.localizedDescription)
                 } else {
-                    guard  let tempLocation = url where error == nil else { return }
-                    let documentDirectory = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask).first
-                    let fullUrl = documentDirectory?.URLByAppendingPathComponent("\(cityId).sqlite")
+                    guard  let tempLocation = url, error == nil else { return }
+                    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+                    let fullUrl = documentDirectory?.appendingPathComponent("\(cityId).sqlite")
                     print("Full URL SQlite file: \(fullUrl)")
                     do {
-                        try NSFileManager.defaultManager().moveItemAtURL(tempLocation, toURL: fullUrl!)
-                    } catch NSCocoaError.FileReadNoSuchFileError {
+                        try FileManager.default.moveItem(at: tempLocation, to: fullUrl!)
+                    } catch CocoaError.fileReadNoSuchFile {
                         print("No such file")
                     } catch {
                         print("Error downloading file : \(error)")
                     }
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    DispatchQueue.main.async(execute: { () -> Void in
                         self.triggerSegue()
-                        self.loaderBackgroundView.hidden = true
+                        self.loaderBackgroundView.isHidden = true
                         self.activityIndicator.effectView.removeFromSuperview()
                     })
                 }
