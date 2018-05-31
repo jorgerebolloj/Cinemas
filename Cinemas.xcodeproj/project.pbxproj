@@ -18,12 +18,7 @@
 		300AC3871EE0724B00604356 /* ComplexTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300AC3861EE0724B00604356 /* ComplexTableViewCell.swift */; };
 		300AC3891EE0757300604356 /* ComplexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 300AC3881EE0757300604356 /* ComplexViewController.swift */; };
 		305950FC1EE7833300D44B78 /* ScheduleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 305950FB1EE7833300D44B78 /* ScheduleTableViewCell.swift */; };
-		305951011EE7990A00D44B78 /* iconTab0@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 305950FD1EE7990A00D44B78 /* iconTab0@3x.png */; };
-		305951021EE7990A00D44B78 /* iconTab1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 305950FE1EE7990A00D44B78 /* iconTab1@3x.png */; };
-		305951031EE7990A00D44B78 /* iconTab2@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 305950FF1EE7990A00D44B78 /* iconTab2@3x.png */; };
-		305951041EE7990A00D44B78 /* iconTab3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 305951001EE7990A00D44B78 /* iconTab3@3x.png */; };
 		305AEB571EE83526003CDB65 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 305AEB561EE83526003CDB65 /* Social.framework */; };
-		307F0E3C1EE0F8370099CFF2 /* cinemas-logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 307F0E3B1EE0F8360099CFF2 /* cinemas-logo.png */; };
 		307F0E421EE11FF70099CFF2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307F0E411EE11FF70099CFF2 /* MapViewController.swift */; };
 		307F0E441EE1255C0099CFF2 /* ComplexLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307F0E431EE1255C0099CFF2 /* ComplexLocation.swift */; };
 		307F0E461EE14F9D0099CFF2 /* BillboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 307F0E451EE14F9D0099CFF2 /* BillboardViewController.swift */; };
@@ -51,12 +46,7 @@
 		300AC3861EE0724B00604356 /* ComplexTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexTableViewCell.swift; sourceTree = "<group>"; };
 		300AC3881EE0757300604356 /* ComplexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexViewController.swift; sourceTree = "<group>"; };
 		305950FB1EE7833300D44B78 /* ScheduleTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScheduleTableViewCell.swift; sourceTree = "<group>"; };
-		305950FD1EE7990A00D44B78 /* iconTab0@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconTab0@3x.png"; path = "Resources/iconTab0@3x.png"; sourceTree = "<group>"; };
-		305950FE1EE7990A00D44B78 /* iconTab1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconTab1@3x.png"; path = "Resources/iconTab1@3x.png"; sourceTree = "<group>"; };
-		305950FF1EE7990A00D44B78 /* iconTab2@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconTab2@3x.png"; path = "Resources/iconTab2@3x.png"; sourceTree = "<group>"; };
-		305951001EE7990A00D44B78 /* iconTab3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "iconTab3@3x.png"; path = "Resources/iconTab3@3x.png"; sourceTree = "<group>"; };
 		305AEB561EE83526003CDB65 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
-		307F0E3B1EE0F8360099CFF2 /* cinemas-logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "cinemas-logo.png"; path = "Resources/cinemas-logo.png"; sourceTree = "<group>"; };
 		307F0E411EE11FF70099CFF2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		307F0E431EE1255C0099CFF2 /* ComplexLocation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComplexLocation.swift; sourceTree = "<group>"; };
 		307F0E451EE14F9D0099CFF2 /* BillboardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BillboardViewController.swift; sourceTree = "<group>"; };
@@ -86,7 +76,6 @@
 		3003F77C1EDFA3ED0004297E = {
 			isa = PBXGroup;
 			children = (
-				307F0E381EE0F30F0099CFF2 /* Resources */,
 				3003F7871EDFA3ED0004297E /* Cinemas */,
 				3003F7861EDFA3ED0004297E /* Products */,
 				9E71F71FD9CBA036F6FA0A5F /* Pods */,
@@ -128,18 +117,6 @@
 				3003F7971EDFA3ED0004297E /* Info.plist */,
 			);
 			path = Cinemas;
-			sourceTree = "<group>";
-		};
-		307F0E381EE0F30F0099CFF2 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				305950FD1EE7990A00D44B78 /* iconTab0@3x.png */,
-				305950FE1EE7990A00D44B78 /* iconTab1@3x.png */,
-				305950FF1EE7990A00D44B78 /* iconTab2@3x.png */,
-				305951001EE7990A00D44B78 /* iconTab3@3x.png */,
-				307F0E3B1EE0F8360099CFF2 /* cinemas-logo.png */,
-			);
-			name = Resources;
 			sourceTree = "<group>";
 		};
 		7718157199E004E57D5464AE /* Frameworks */ = {
@@ -222,12 +199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				305951041EE7990A00D44B78 /* iconTab3@3x.png in Resources */,
-				305951031EE7990A00D44B78 /* iconTab2@3x.png in Resources */,
-				305951021EE7990A00D44B78 /* iconTab1@3x.png in Resources */,
 				3003F7961EDFA3ED0004297E /* LaunchScreen.storyboard in Resources */,
-				307F0E3C1EE0F8370099CFF2 /* cinemas-logo.png in Resources */,
-				305951011EE7990A00D44B78 /* iconTab0@3x.png in Resources */,
 				3003F7931EDFA3ED0004297E /* Assets.xcassets in Resources */,
 				3003F78E1EDFA3ED0004297E /* Main.storyboard in Resources */,
 			);
