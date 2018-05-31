@@ -40,41 +40,6 @@ class CitiesViewController: UIViewController {
                 })
             }
         }
-        
-//        let url = URL(string: Constants.apiUrlCities)
-//        let session = URLSession.shared
-//
-//        let qualityOfServiceClass = DispatchQoS.QoSClass.background
-//        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
-//        backgroundQueue.async(execute: {
-//            let task = session.dataTask(with: url!, completionHandler: {data, response, error -> Void in
-//                if(error != nil) {
-//                    print(error!.localizedDescription)
-//                } else {
-//                    let nsdata:Data = NSData(data: data!) as Data
-//                    do {
-//                        let jsonCompleto = try JSONSerialization.jsonObject(with: nsdata, options: JSONSerialization.ReadingOptions.mutableContainers)
-//                        print("Json Completo\(jsonCompleto)")
-//                        if let nsArrayJson = jsonCompleto as? NSArray {
-//                            nsArrayJson.enumerateObjects({ objeto, index, stop in
-//                                let arrayCity = objeto as! NSDictionary
-//                                print("City \(index):\(arrayCity)")
-//                                self.saveCity(arrayCity)
-//
-//                                DispatchQueue.main.async(execute: { () -> Void in
-//                                    self.citiesTableView.reloadData()
-//                                    self.loaderBackgroundView.isHidden = true
-////                                    self.activityIndicator.effectView.removeFromSuperview()
-//                                })
-//                            })
-//                        }
-//                    } catch {
-//                        print("Error al serializar Json")
-//                    }
-//                }
-//            })
-//            task.resume()
-//        })
     }
     
     func saveCity(_ cityValues: NSDictionary) {
@@ -155,38 +120,5 @@ extension CitiesViewController: UITableViewDataSource, UITableViewDelegate {
                 //                        self.activityIndicator.effectView.removeFromSuperview()
             })
         }
-        
-//        let url = URL(string: Constants.apiUrlCity + cityId)
-//        let downloadRequest = URLRequest(url: url!)
-//        let session = URLSession.shared
-//
-//        let qualityOfServiceClass = DispatchQoS.QoSClass.background
-//        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
-//        backgroundQueue.async(execute: {
-//            let task = session.downloadTask(with: downloadRequest, completionHandler: {url, response, error -> Void in
-//                if(error != nil) {
-//                    print(error!.localizedDescription)
-//                } else {
-//                    guard  let tempLocation = url, error == nil else { return }
-//                    let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-//                    let fullUrl = documentDirectory?.appendingPathComponent("\(cityId).sqlite")
-//                    print("Full URL SQlite file: \(fullUrl)")
-//                    do {
-//                        try FileManager.default.moveItem(at: tempLocation, to: fullUrl!)
-//                    } catch CocoaError.fileReadNoSuchFile {
-//                        print("No such file")
-//                    } catch {
-//                        print("Error downloading file : \(error)")
-//                    }
-//                    DispatchQueue.main.async(execute: { () -> Void in
-//                        self.triggerSegue()
-//                        self.loaderBackgroundView.isHidden = true
-////                        self.activityIndicator.effectView.removeFromSuperview()
-//                    })
-//                }
-//            })
-//            task.resume()
-//        })
-    }
 }
 
