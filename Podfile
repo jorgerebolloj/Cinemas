@@ -8,6 +8,7 @@ use_frameworks!
 def podsCinemas
     
     # Pods for Cinemas
+    pod 'Alamofire', '~> 4.7'
     pod 'FMDB'
     #pod 'TNImageSliderViewController'
     
