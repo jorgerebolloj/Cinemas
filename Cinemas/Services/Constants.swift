@@ -9,8 +9,8 @@
 import Foundation
 
 struct Constants {
-    static let apiUrlCities = "http://api.cinepolis.com.mx/Consumo.svc/json/ObtenerCiudades"
-    static let apiUrlCity = "http://api.cinepolis.com.mx/sqlite.aspx?idCiudad="
-    static let apiUrlGallery = "http://www.cinepolis.com/_MOVIL/iPhone/galeria/thumb/"
-    static let apiUrlTrailer = "http://movil.cinepolis.com/ios/mx/trailers/"
+    static let apiUrlCities = "" // Url deleted by client request
+    static let apiUrlCity = "" // Url deleted by client request
+    static let apiUrlGallery = "" // Url deleted by client request
+    static let apiUrlTrailer = "" // Url deleted by client request
 }
